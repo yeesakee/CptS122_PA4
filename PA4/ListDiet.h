@@ -1,3 +1,6 @@
+#ifndef LISTDIET_H
+#define LISTDIET_H
+
 #include <string>
 #include <iostream>
 #include "ListNodeDiet.h"
@@ -15,3 +18,4 @@ private:
 	ListNodeDiet* pHead;
 	ListNodeDiet* pTail;
 };
+#endif
