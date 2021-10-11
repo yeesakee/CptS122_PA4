@@ -12,7 +12,11 @@ public:
 	ListDiet();
 	~ListDiet();
 
+	ListNodeDiet* getpHead();
+	ListNodeDiet* getpTail();
+
 	bool isEmpty();
+	void insert(ListNodeDiet* newNode);
 
 private:
 	ListNodeDiet* pHead;

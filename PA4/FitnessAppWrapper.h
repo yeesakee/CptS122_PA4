@@ -18,15 +18,16 @@ public:
 	void displayMenu();
 	// Calls the method that the user chose
 	void methodChosen(int choice);
-
+	// Store any edits made and exit the program
+	void exit();
 
 	// Loads the daily diet plans from fileStream
 	void loadDailyPlanDiet(fstream& fileStream, DietPlan& plan);
 	// Loads the weekly diet plan given 
-	void loadWeeklyPlanDiet(fstream& fileStream, DietPlan weeklyPlan[]);
+	void loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan);
 	
 	// Loads the daily diet plan from input_diet
-	void displayDailyPlanDiet(fstream& input_diet);
+	void displayDailyPlanDiet(fstream& input_diet, ListNodeDiet* curr);
 	// Loads the weekly diet plan
 	void displayWeeklyPlanDiet();
 
@@ -37,6 +38,8 @@ public:
 
 	// Edit the daily diet plan given
 	void editDailyDietPlan();
+
+	/*	Helper Methods	*/
 
 private:
 	string user_choice;

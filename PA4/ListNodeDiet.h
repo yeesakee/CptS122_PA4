@@ -10,7 +10,7 @@ class ListNodeDiet {
 public:
 	ListNodeDiet();
 
-	void setPointer(ListNodeDiet* const newPointer);
+	void setNextPointer(ListNodeDiet* const newPointer);
 	ListNodeDiet* getNextPointer();
 	void setData(DietPlan data);
 	DietPlan getData();

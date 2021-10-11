@@ -3,8 +3,8 @@
 FitnessAppWrapper::FitnessAppWrapper() {
 	user_choice = "";
 	ld = ListDiet();
-	input_diet = fstream("dietplan.txt");
-	output_diet = fstream("dietplan.txt");
+	input_diet = fstream("dietPlans.txt");
+	output_diet = fstream("dietPlans.txt");
 }
 
 void FitnessAppWrapper::runApp(void) {
@@ -15,21 +15,25 @@ void FitnessAppWrapper::runApp(void) {
 	}
 }
 
+void FitnessAppWrapper::exit() {
+	storeWeeklyPlanDiet();
+}
+
 void FitnessAppWrapper::methodChosen(int choice) {
 	if (choice == 1) {
-
+		loadWeeklyPlanDiet(output_diet, ld);
 	}
 	else if (choice == 2) {
 
 	}
 	else if (choice == 3) {
-
+		storeWeeklyPlanDiet();
 	}
 	else if (choice == 4) {
 
 	}
 	else if (choice == 5) {
-
+		displayWeeklyPlanDiet();
 	}
 	else if (choice == 6) {
 
@@ -41,7 +45,7 @@ void FitnessAppWrapper::methodChosen(int choice) {
 
 	}
 	else if (choice == 9) {
-
+		exit();
 	}
 	else {
 		cout << "invalid command" << endl;
@@ -63,13 +67,32 @@ void FitnessAppWrapper::displayMenu() {
 }
 
 void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
-	
+	ListNodeDiet* lnd = new ListNodeDiet();
+	fileStream >> plan;
+	(*lnd).setData(plan);
+	ld.insert(lnd);
 }
 
-void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, DietPlan weeklyPlan[]) {
-
+void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan) {
+	ListNodeDiet* lnd = weeklyPlan.getpHead();
+	for (int i = 0; i < 7; i++) {
+		DietPlan dp = lnd->getData();
+		loadDailyPlanDiet(fileStream, dp);
+		lnd = lnd->getNextPointer();
+	}
 }
 
-void FitnessAppWrapper::displayDailyPlanDiet(fstream& input_diet) {
+void FitnessAppWrapper::displayDailyPlanDiet(fstream& input_diet, ListNodeDiet* curr) {
+	DietPlan ld = curr->getData();
+	cout << "Plan Name: " << ld.getPlanName() << endl;
+	cout << "Goal Calories: " << ld.getGoalCalories() << endl;
+	cout << "Date: " << ld.getDate() << endl;
+}
 
+void FitnessAppWrapper::displayWeeklyPlanDiet() {
+	ListNodeDiet* curr = ld.getpHead();
+	while (curr != ld.getpTail()) {
+		displayDailyPlanDiet(input_diet, curr);
+		curr = curr->getNextPointer();
+	}
 }

@@ -1,3 +1,9 @@
+/*
+Yeesa Kee
+CPTS 122
+Lab 4
+Represents a daily diet plan. Including the goal calories, plan name, and date of the plan.
+*/
 #ifndef DIETPLAN_H
 #define DIETPLAN_H
 

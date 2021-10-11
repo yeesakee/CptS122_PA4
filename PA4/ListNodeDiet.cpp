@@ -5,7 +5,7 @@ ListNodeDiet::ListNodeDiet() {
 	pNext = nullptr;
 }
 
-void ListNodeDiet::setPointer(ListNodeDiet* const newPointer) {
+void ListNodeDiet::setNextPointer(ListNodeDiet* const newPointer) {
 	this->pNext = newPointer;
 }
 

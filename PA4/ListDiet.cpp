@@ -13,6 +13,21 @@ ListDiet::~ListDiet() {
 	}
 }
 
+ListNodeDiet* ListDiet::getpHead() {
+	return pHead;
+}
+
+ListNodeDiet* ListDiet::getpTail() {
+	return pTail;
+}
+
 bool ListDiet::isEmpty() {
 	return this->pHead == NULL;
+}
+
+void ListDiet::insert(ListNodeDiet* newNode) {
+	if (isEmpty()) {
+		pHead = newNode;
+	}
+	pTail->setNextPointer(newNode);
 }
