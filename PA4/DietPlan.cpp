@@ -39,3 +39,25 @@ string DietPlan::getPlanName() {
 string DietPlan::getDate() {
 	return date;
 }
+
+ostream& operator << (ostream& out, DietPlan& d) {
+	out << d.getPlanName() << endl;
+	out << d.getGoalCalories() << endl;
+	out << d.getDate() << endl;
+	out << endl;
+}
+
+istream& operator >> (istream& in, DietPlan& d) {
+	int goal_calories = 0;
+	string plan_name = "";
+	string date = "";
+
+	std::getline(in, plan_name);
+	in >> goal_calories;
+	in >> date;
+	in.ignore('\n');
+
+	d.setPlanName(plan_name);
+	d.editGoal(goal_calories);
+	d.setDate(date);
+}
