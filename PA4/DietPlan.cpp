@@ -9,6 +9,12 @@ DietPlan::DietPlan(){
 DietPlan::~DietPlan() {
 }
 
+DietPlan::DietPlan(const DietPlan& dp) {
+	goal_calories = dp.goal_calories;
+	plan_name = dp.plan_name;
+	date = dp.date;
+}
+
 void DietPlan::editGoal(int calories) {
 
 	goal_calories = calories;

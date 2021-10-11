@@ -12,6 +12,7 @@ class DietPlan {
 public:
 	DietPlan();
 	~DietPlan();
+	DietPlan(const DietPlan& dp);
 
 	void editGoal(int calores);
 	void setPlanName(string name);
@@ -29,3 +30,4 @@ private:
 
 
 #endif DIETPLAN_H
+
