@@ -13,7 +13,7 @@ public:
 	// starts the main application
 	void runApp(void);
 	// Displays nine menu options for the user to choose from
-	void displayMenu();
+	string displayMenu();
 
 	// Loads the daily diet plans from fileStream
 	void loadDailyPlanDiet(fstream& fileStream, DietPlan& plan);
@@ -32,6 +32,7 @@ public:
 
 
 private:
+	string user_choice;
 	ListDiet ld;
 	fstream input_diet;
 	fstream output_diet;
