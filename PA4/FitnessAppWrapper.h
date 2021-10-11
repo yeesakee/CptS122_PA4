@@ -10,10 +10,15 @@
 
 class FitnessAppWrapper {
 public:
+	FitnessAppWrapper();
+	
 	// starts the main application
 	void runApp(void);
 	// Displays nine menu options for the user to choose from
-	string displayMenu();
+	void displayMenu();
+	// Calls the method that the user chose
+	void methodChosen(int choice);
+
 
 	// Loads the daily diet plans from fileStream
 	void loadDailyPlanDiet(fstream& fileStream, DietPlan& plan);
@@ -30,6 +35,8 @@ public:
 	// Store the weekly diet plan
 	void storeWeeklyPlanDiet();
 
+	// Edit the daily diet plan given
+	void editDailyDietPlan();
 
 private:
 	string user_choice;
