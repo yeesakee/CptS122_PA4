@@ -82,7 +82,7 @@ void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyP
 	}
 }
 
-void FitnessAppWrapper::displayDailyPlanDiet(fstream& input_diet, ListNodeDiet* curr) {
+void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
 	DietPlan ld = curr->getData();
 	cout << "Plan Name: " << ld.getPlanName() << endl;
 	cout << "Goal Calories: " << ld.getGoalCalories() << endl;
@@ -91,8 +91,20 @@ void FitnessAppWrapper::displayDailyPlanDiet(fstream& input_diet, ListNodeDiet* 
 
 void FitnessAppWrapper::displayWeeklyPlanDiet() {
 	ListNodeDiet* curr = ld.getpHead();
-	while (curr != ld.getpTail()) {
-		displayDailyPlanDiet(input_diet, curr);
+	for (int i = 0; i < 7; i++) {
+		displayDailyPlanDiet(curr);
+		curr = curr->getNextPointer();
+	}
+}
+
+void FitnessAppWrapper::storeDailyPlanDiet(DietPlan plan) {
+	output_diet << plan;
+}
+
+void FitnessAppWrapper::storeWeeklyPlanDiet() {
+	ListNodeDiet* curr = ld.getpHead();
+	for (int i = 0; i < 7; i++) {
+		storeDailyPlanDiet(curr->getData());
 		curr = curr->getNextPointer();
 	}
 }

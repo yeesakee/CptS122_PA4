@@ -27,12 +27,12 @@ public:
 	void loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan);
 	
 	// Loads the daily diet plan from input_diet
-	void displayDailyPlanDiet(fstream& input_diet, ListNodeDiet* curr);
+	void displayDailyPlanDiet(ListNodeDiet* curr);
 	// Loads the weekly diet plan
 	void displayWeeklyPlanDiet();
 
 	// Store the daily diet plan to output_diet
-	void storeDailyPlanDiet(fstream& output_diet);
+	void storeDailyPlanDiet(DietPlan plan);
 	// Store the weekly diet plan
 	void storeWeeklyPlanDiet();
 
