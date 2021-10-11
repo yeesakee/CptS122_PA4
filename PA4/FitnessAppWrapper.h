@@ -37,10 +37,10 @@ public:
 	void storeWeeklyPlanDiet();
 
 	// Edit the daily diet plan given
-	void editDailyDietPlan();
+	void editDailyDietPlan(DietPlan plan);
 
 	/*	Helper Methods	*/
-
+	void dietPlanChange(DietPlan plan);
 private:
 	string user_choice;
 	ListDiet ld;

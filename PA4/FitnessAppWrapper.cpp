@@ -108,3 +108,32 @@ void FitnessAppWrapper::storeWeeklyPlanDiet() {
 		curr = curr->getNextPointer();
 	}
 }
+
+void FitnessAppWrapper::editDailyDietPlan(DietPlan plan) {
+
+}
+
+void FitnessAppWrapper::dietPlanChange(DietPlan plan) {
+	string choice = "";
+	string change = "";
+
+	cout << "Please type in the number of the command: " << endl;
+	cout << "1. Change plan name" << endl;
+	cout << "2. Change calorie goal" << endl;
+	cout << "3. Change date" << endl;
+	cin >> choice;
+	cout << "Please type in the new value";
+	cin >> change;
+	if (stoi(choice) == 1) {
+		plan.setPlanName(change);
+	}
+	else if (stoi(choice) == 2) {
+		plan.editGoal(stoi(change));
+	}
+	else if (stoi(choice) == 3) {
+		plan.setDate(change);
+	}
+	else {
+		cout << "invalid command";
+	}
+}
