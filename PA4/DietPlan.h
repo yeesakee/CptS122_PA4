@@ -10,6 +10,7 @@ Represents a daily diet plan. Including the goal calories, plan name, and date o
 #include <vector>
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using std::string;
 using std::vector;

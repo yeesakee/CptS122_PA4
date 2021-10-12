@@ -1,12 +1,13 @@
 #ifndef FITNESSAPPWRAPPER_H
 #define FITNESSAPPWRAPPER_H
 
-#include "DietPlan.h";
-#include "ExercisePlan.h";
-#include "ListDiet.h";
-#include "ListNodeDiet.h";
-#include <iostream>;
-#include <fstream>;
+#include <iostream>
+#include <fstream>
+
+#include "DietPlan.h"
+#include "ExercisePlan.h"
+#include "ListDiet.h"
+#include "ListNodeDiet.h"
 
 class FitnessAppWrapper {
 public:
@@ -44,8 +45,8 @@ public:
 private:
 	string user_choice;
 	ListDiet ld;
-	fstream input_diet;
-	fstream output_diet;
+	fstream diet;
+	fstream exercise;
 };
 
 

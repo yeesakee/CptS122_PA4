@@ -30,4 +30,5 @@ void ListDiet::insert(ListNodeDiet* newNode) {
 		pHead = newNode;
 	}
 	pTail->setNextPointer(newNode);
+	pTail = newNode;
 }

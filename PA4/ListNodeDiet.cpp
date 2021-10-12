@@ -1,7 +1,6 @@
 #include "ListNodeDiet.h"
 
 ListNodeDiet::ListNodeDiet() {
-	dp = DietPlan();
 	pNext = nullptr;
 }
 

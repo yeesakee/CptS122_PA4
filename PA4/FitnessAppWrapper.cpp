@@ -3,11 +3,10 @@
 FitnessAppWrapper::FitnessAppWrapper() {
 	user_choice = "";
 	ld = ListDiet();
-	input_diet = fstream("dietPlans.txt");
-	output_diet = fstream("dietPlans.txt");
+	diet = fstream("dietPlans.txt");
 }
 
-void FitnessAppWrapper::runApp(void) {
+void FitnessAppWrapper::runApp() {
 	int choice = stoi(user_choice);
 	while (choice != 9) {
 		displayMenu();
@@ -21,7 +20,7 @@ void FitnessAppWrapper::exit() {
 
 void FitnessAppWrapper::methodChosen(int choice) {
 	if (choice == 1) {
-		loadWeeklyPlanDiet(output_diet, ld);
+		loadWeeklyPlanDiet(diet, ld);
 	}
 	else if (choice == 2) {
 
@@ -67,19 +66,24 @@ void FitnessAppWrapper::displayMenu() {
 }
 
 void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
-	ListNodeDiet* lnd = new ListNodeDiet();
 	fileStream >> plan;
-	(*lnd).setData(plan);
-	ld.insert(lnd);
 }
 
 void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan) {
-	ListNodeDiet* lnd = weeklyPlan.getpHead();
+	ListNodeDiet* lnd_prev;
 	for (int i = 0; i < 7; i++) {
-		DietPlan dp = lnd->getData();
+		ListNodeDiet* lnd = new ListNodeDiet();
+		DietPlan dp;
 		loadDailyPlanDiet(fileStream, dp);
-		lnd = lnd->getNextPointer();
+		(*lnd).setData(dp);
+		ld.insert(lnd);
+		lnd->setNextPointer(nullptr);
+		if (i != 0) {
+			lnd_prev->setNextPointer(lnd);
+		}
+		lnd_prev = lnd;
 	}
+	weeklyPlan = ld;
 }
 
 void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
@@ -98,7 +102,7 @@ void FitnessAppWrapper::displayWeeklyPlanDiet() {
 }
 
 void FitnessAppWrapper::storeDailyPlanDiet(DietPlan plan) {
-	output_diet << plan;
+	diet << plan;
 }
 
 void FitnessAppWrapper::storeWeeklyPlanDiet() {

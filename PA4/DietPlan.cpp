@@ -44,7 +44,12 @@ ostream& operator << (ostream& out, DietPlan& d) {
 	out << d.getPlanName() << endl;
 	out << d.getGoalCalories() << endl;
 	out << d.getDate() << endl;
-	out << endl;
+}
+
+ofstream& operator << (ofstream& out, DietPlan& d) {
+	out << d.getPlanName() << endl;
+	out << d.getGoalCalories() << endl;
+	out << d.getDate() << endl;
 }
 
 istream& operator >> (istream& in, DietPlan& d) {
@@ -52,7 +57,7 @@ istream& operator >> (istream& in, DietPlan& d) {
 	string plan_name = "";
 	string date = "";
 
-	std::getline(in, plan_name);
+	getline(in, plan_name);
 	in >> goal_calories;
 	in >> date;
 	in.ignore('\n');
