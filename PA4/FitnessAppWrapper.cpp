@@ -1,14 +1,14 @@
 #include "FitnessAppWrapper.h"
 
 FitnessAppWrapper::FitnessAppWrapper() {
-	user_choice = "";
-	diet.open("dietPlan.txt");
+	user_choice = "0";
 }
 
 void FitnessAppWrapper::runApp() {
-	int choice = stoi(user_choice);
+	int choice = 0;
 	while (choice != 9) {
 		displayMenu();
+		choice = stoi(user_choice);
 		methodChosen(choice);
 	}
 }
@@ -41,7 +41,6 @@ void FitnessAppWrapper::methodChosen(int choice) {
 		if (plan != nullptr) {
 			editDailyDietPlan(plan);
 		}
-		cout << "success";
 	}
 	else if (choice == 8) {
 
@@ -55,7 +54,6 @@ void FitnessAppWrapper::methodChosen(int choice) {
 }
 
 void FitnessAppWrapper::displayMenu() {
-	cout << "Please choose from the following nine options (enter number)" << endl;
 	cout << "1. Load weekly diet plan from file" << endl;
 	cout << "2. Load weekly exercise plan from file" << endl;
 	cout << "3. Store weekly diet plan to file" << endl;
@@ -65,7 +63,9 @@ void FitnessAppWrapper::displayMenu() {
 	cout << "7. Edit daily diet plan" << endl;
 	cout << "8. Edit daily exercise plan" << endl;
 	cout << "9. Exit." << endl;
+	cout << "Please choose from the following nine options (enter number): ";
 	cin >> user_choice;
+	cout << endl;
 }
 
 void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
@@ -73,6 +73,7 @@ void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
 }
 
 void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan) {
+	fileStream.open("dietPlan.txt");
 	for (int i = 0; i < 7; i++) {
 		ListNodeDiet* lnd = new ListNodeDiet();
 		DietPlan* dp = new DietPlan();
@@ -80,6 +81,7 @@ void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyP
 		(*lnd).setData((*dp));
 		ld.insert(lnd);
 	}
+	fileStream.close();
 }
 
 void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
@@ -100,14 +102,17 @@ void FitnessAppWrapper::displayWeeklyPlanDiet() {
 
 void FitnessAppWrapper::storeDailyPlanDiet(DietPlan plan) {
 	diet << plan;
+	diet << endl;
 }
 
 void FitnessAppWrapper::storeWeeklyPlanDiet() {
 	ListNodeDiet* curr = ld.getpHead();
+	diet.open("dietPlan.txt");
 	for (int i = 0; i < 7; i++) {
 		storeDailyPlanDiet(curr->getData());
 		curr = curr->getNextPointer();
 	}
+	diet.close();
 }
 
 void FitnessAppWrapper::editDailyDietPlan(ListNodeDiet* plan) {
@@ -125,18 +130,21 @@ void FitnessAppWrapper::dietPlanChange(ListNodeDiet* plan) {
 	cin >> choice;
 	cout << "Please type in the new value: ";
 	cin >> change;
+
+	DietPlan dp = plan->getData();
 	if (stoi(choice) == 1) {
-		plan->getData().setPlanName(change);
+		dp.setPlanName(change);
 	}
 	else if (stoi(choice) == 2) {
-		plan->getData().editGoal(stoi(change));
+		dp.editGoal(stoi(change));
 	}
 	else if (stoi(choice) == 3) {
-		plan->getData().setDate(change);
+		dp.setDate(change);
 	}
 	else {
 		cout << "invalid command";
 	}
+	plan->setData(dp);
 }
 
 ListNodeDiet* FitnessAppWrapper::getDietPlanEdit() {
