@@ -47,7 +47,7 @@ ostream& operator << (ostream& out, DietPlan& d) {
 	return out;
 }
 
-ofstream& operator << (ofstream& out, DietPlan& d) {
+fstream& operator << (fstream& out, DietPlan& d) {
 	out << d.getPlanName() << endl;
 	out << d.getGoalCalories() << endl;
 	out << d.getDate() << endl;

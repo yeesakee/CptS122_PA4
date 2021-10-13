@@ -52,7 +52,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="dietPlan.txt">
+    <Text Include="dietPlans.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

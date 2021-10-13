@@ -6,6 +6,15 @@ ExercisePlan::ExercisePlan() {
 	date = "";
 }
 
+ExercisePlan::~ExercisePlan() {
+}
+
+ExercisePlan::ExercisePlan(const ExercisePlan& dp) {
+	goal_steps = dp.goal_steps;
+	plan_name = dp.plan_name;
+	date = dp.date;
+}
+
 void ExercisePlan::editGoal(int steps) {
 	goal_steps = steps;
 }
@@ -27,4 +36,34 @@ string ExercisePlan::getPlanName() {
 
 string ExercisePlan::getDate() {
 	return date;
+}
+
+ostream& operator << (ostream& out, ExercisePlan& d) {
+	out << d.getPlanName() << endl;
+	out << d.getGoalSteps() << endl;
+	out << d.getDate() << endl;
+	return out;
+}
+
+fstream& operator << (fstream& out, ExercisePlan& d) {
+	out << d.getPlanName() << endl;
+	out << d.getGoalSteps() << endl;
+	out << d.getDate() << endl;
+	return out;
+}
+
+fstream& operator >> (fstream& in, ExercisePlan& d) {
+	int goal_calories = 100;
+	string plan_name = "";
+	string date = "";
+
+	in >> plan_name;
+	in >> goal_calories;
+	in >> date;
+
+	d.setPlanName(plan_name);
+	d.editGoal(goal_calories);
+	d.setDate(date);
+
+	return in;
 }

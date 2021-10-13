@@ -154,7 +154,7 @@
     <ClInclude Include="ListNodeDiet.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="dietPlan.txt" />
+    <Text Include="dietPlans.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

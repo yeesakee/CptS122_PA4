@@ -7,13 +7,11 @@ Represents a daily diet plan. Including the goal calories, plan name, and date o
 #ifndef DIETPLAN_H
 #define DIETPLAN_H
 
-#include <vector>
 #include <iostream>
 #include <string>
 #include <fstream>
 
 using std::string;
-using std::vector;
 using namespace std;
 
 class DietPlan {
@@ -45,7 +43,7 @@ ostream& operator << (ostream& out, DietPlan& d);
 
 // Overloaded stream insertion << writing to a file
 // Will insert the plan name, goal calories, and date from DietPlan& d.
-ofstream& operator << (ofstream& out, DietPlan& d);
+fstream& operator << (fstream& out, DietPlan& d);
 
 // Overloaded stream extraction << to read a plan from a file
 // Will insert the plan name, goal calories, and date into DietPlan& d from the file

@@ -47,9 +47,13 @@ public:
 	// Return a ListNodeDiet pointer to the plan the user wants to change nullptr if not found
 	ListNodeDiet* getDietPlanEdit();
 private:
+	// store the command the user entered
 	string user_choice;
+	// store the ListDiet of the weekly diet plan
 	ListDiet ld;
+	// fstream for diet, dietPlans.txt
 	fstream diet;
+	// fstream for exercise, exercisePlans.txt
 	fstream exercise;
 };
 
