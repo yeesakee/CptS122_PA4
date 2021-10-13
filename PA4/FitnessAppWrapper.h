@@ -38,10 +38,14 @@ public:
 	void storeWeeklyPlanDiet();
 
 	// Edit the daily diet plan given
-	void editDailyDietPlan(DietPlan plan);
+	void editDailyDietPlan(ListNodeDiet* plan);
 
-	/*	Helper Methods	*/
-	void dietPlanChange(DietPlan plan);
+	/*****	Helper Methods	*****/
+	// Prompt the user for what they want to change from DietPlan
+	// Update value to new value
+	void dietPlanChange(ListNodeDiet* plan);
+	// Return a ListNodeDiet pointer to the plan the user wants to change nullptr if not found
+	ListNodeDiet* getDietPlanEdit();
 private:
 	string user_choice;
 	ListDiet ld;

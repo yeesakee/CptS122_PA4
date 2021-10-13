@@ -44,25 +44,28 @@ ostream& operator << (ostream& out, DietPlan& d) {
 	out << d.getPlanName() << endl;
 	out << d.getGoalCalories() << endl;
 	out << d.getDate() << endl;
+	return out;
 }
 
 ofstream& operator << (ofstream& out, DietPlan& d) {
 	out << d.getPlanName() << endl;
 	out << d.getGoalCalories() << endl;
 	out << d.getDate() << endl;
+	return out;
 }
 
-istream& operator >> (istream& in, DietPlan& d) {
-	int goal_calories = 0;
+fstream& operator >> (fstream& in, DietPlan& d) {
+	int goal_calories = 100;
 	string plan_name = "";
 	string date = "";
 
-	getline(in, plan_name);
+	in >> plan_name;
 	in >> goal_calories;
 	in >> date;
-	in.ignore('\n');
 
 	d.setPlanName(plan_name);
 	d.editGoal(goal_calories);
 	d.setDate(date);
+
+	return in;
 }

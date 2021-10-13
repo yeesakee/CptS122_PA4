@@ -1,8 +1,8 @@
 #include "ListDiet.h"
 
 ListDiet::ListDiet() {
-	pHead = NULL;
-	pTail = NULL;
+	pHead = nullptr;
+	pTail = nullptr;
 }
 
 ListDiet::~ListDiet() {
@@ -29,6 +29,19 @@ void ListDiet::insert(ListNodeDiet* newNode) {
 	if (isEmpty()) {
 		pHead = newNode;
 	}
-	pTail->setNextPointer(newNode);
+	else {
+		pTail->setNextPointer(newNode);
+	}
 	pTail = newNode;
+}
+
+ListNodeDiet* ListDiet::searchDietPlan(string plan_name) {
+	ListNodeDiet* curr = pHead;
+	while (curr != nullptr) {
+		if (curr->getData().getPlanName().compare(plan_name) == 0) {
+			return curr;
+		}
+		curr = curr->getNextPointer();
+	}
+	return nullptr;
 }

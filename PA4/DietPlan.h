@@ -39,10 +39,14 @@ private:
 
 #endif DIETPLAN_H
 
-// Overloaded stream insertion << to display to the screen or writing to a file
+// Overloaded stream insertion << to display to the screen
 // Will insert the plan name, goal calories, and date from DietPlan& d.
 ostream& operator << (ostream& out, DietPlan& d);
 
+// Overloaded stream insertion << writing to a file
+// Will insert the plan name, goal calories, and date from DietPlan& d.
+ofstream& operator << (ofstream& out, DietPlan& d);
+
 // Overloaded stream extraction << to read a plan from a file
 // Will insert the plan name, goal calories, and date into DietPlan& d from the file
-istream& operator >> (istream& in, DietPlan& d);
+fstream& operator >> (fstream& in, DietPlan& d);

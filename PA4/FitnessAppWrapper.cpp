@@ -2,8 +2,7 @@
 
 FitnessAppWrapper::FitnessAppWrapper() {
 	user_choice = "";
-	ld = ListDiet();
-	diet = fstream("dietPlans.txt");
+	diet.open("dietPlan.txt");
 }
 
 void FitnessAppWrapper::runApp() {
@@ -38,7 +37,11 @@ void FitnessAppWrapper::methodChosen(int choice) {
 
 	}
 	else if (choice == 7) {
-
+		ListNodeDiet* plan = getDietPlanEdit();
+		if (plan != nullptr) {
+			editDailyDietPlan(plan);
+		}
+		cout << "success";
 	}
 	else if (choice == 8) {
 
@@ -70,20 +73,13 @@ void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
 }
 
 void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan) {
-	ListNodeDiet* lnd_prev;
 	for (int i = 0; i < 7; i++) {
 		ListNodeDiet* lnd = new ListNodeDiet();
-		DietPlan dp;
-		loadDailyPlanDiet(fileStream, dp);
-		(*lnd).setData(dp);
+		DietPlan* dp = new DietPlan();
+		loadDailyPlanDiet(fileStream, (*dp));
+		(*lnd).setData((*dp));
 		ld.insert(lnd);
-		lnd->setNextPointer(nullptr);
-		if (i != 0) {
-			lnd_prev->setNextPointer(lnd);
-		}
-		lnd_prev = lnd;
 	}
-	weeklyPlan = ld;
 }
 
 void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
@@ -91,6 +87,7 @@ void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
 	cout << "Plan Name: " << ld.getPlanName() << endl;
 	cout << "Goal Calories: " << ld.getGoalCalories() << endl;
 	cout << "Date: " << ld.getDate() << endl;
+	cout << endl;
 }
 
 void FitnessAppWrapper::displayWeeklyPlanDiet() {
@@ -113,31 +110,56 @@ void FitnessAppWrapper::storeWeeklyPlanDiet() {
 	}
 }
 
-void FitnessAppWrapper::editDailyDietPlan(DietPlan plan) {
-
+void FitnessAppWrapper::editDailyDietPlan(ListNodeDiet* plan) {
+	dietPlanChange(plan);
 }
 
-void FitnessAppWrapper::dietPlanChange(DietPlan plan) {
+void FitnessAppWrapper::dietPlanChange(ListNodeDiet* plan) {
 	string choice = "";
 	string change = "";
 
-	cout << "Please type in the number of the command: " << endl;
 	cout << "1. Change plan name" << endl;
 	cout << "2. Change calorie goal" << endl;
 	cout << "3. Change date" << endl;
+	cout << "Please type in the number of the command: ";
 	cin >> choice;
-	cout << "Please type in the new value";
+	cout << "Please type in the new value: ";
 	cin >> change;
 	if (stoi(choice) == 1) {
-		plan.setPlanName(change);
+		plan->getData().setPlanName(change);
 	}
 	else if (stoi(choice) == 2) {
-		plan.editGoal(stoi(change));
+		plan->getData().editGoal(stoi(change));
 	}
 	else if (stoi(choice) == 3) {
-		plan.setDate(change);
+		plan->getData().setDate(change);
 	}
 	else {
 		cout << "invalid command";
 	}
+}
+
+ListNodeDiet* FitnessAppWrapper::getDietPlanEdit() {
+	string plan_name = "";
+	ListNodeDiet* diet = nullptr;
+	bool found = false;
+	bool stop = false;
+	displayWeeklyPlanDiet();
+
+	while (!found && !stop) {
+		cout << "Please type in the plan name of the diet plan you want to edit: ";
+		cin >> plan_name;
+		diet = ld.searchDietPlan(plan_name);
+		if (diet == nullptr) {
+			cout << "Diet plan not found, try again or enter exit: ";
+			cin >> plan_name;
+			if (plan_name.compare("exit") == 0) {
+				stop = true;
+			}
+		}
+		else {
+			found = true;
+		}
+	}
+	return diet;
 }
