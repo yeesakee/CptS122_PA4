@@ -143,7 +143,9 @@
     <ClCompile Include="ExercisePlan.cpp" />
     <ClCompile Include="FitnessAppWrapper.cpp" />
     <ClCompile Include="ListDiet.cpp" />
+    <ClCompile Include="ListExercise.cpp" />
     <ClCompile Include="ListNodeDiet.cpp" />
+    <ClCompile Include="ListNodeExercise.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,10 +153,13 @@
     <ClInclude Include="ExercisePlan.h" />
     <ClInclude Include="FitnessAppWrapper.h" />
     <ClInclude Include="ListDiet.h" />
+    <ClInclude Include="ListExercise.h" />
     <ClInclude Include="ListNodeDiet.h" />
+    <ClInclude Include="ListNodeExercise.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="dietPlans.txt" />
+    <Text Include="exercisePlans.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

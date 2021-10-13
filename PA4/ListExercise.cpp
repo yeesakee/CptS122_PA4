@@ -7,17 +7,17 @@ ListExercise::ListExercise() {
 
 ListExercise::~ListExercise() {
 	while (!isEmpty()) {
-		ListNodeDiet* temp = pHead;
+		ListNodeExercise* temp = pHead;
 		pHead = pHead->getNextPointer();
 		delete(temp);
 	}
 }
 
-ListNodeDiet* ListExercise::getpHead() {
+ListNodeExercise* ListExercise::getpHead() {
 	return pHead;
 }
 
-ListNodeDiet* ListExercise::getpTail() {
+ListNodeExercise* ListExercise::getpTail() {
 	return pTail;
 }
 
