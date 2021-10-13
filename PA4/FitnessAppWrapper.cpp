@@ -4,6 +4,17 @@ FitnessAppWrapper::FitnessAppWrapper() {
 	user_choice = "0";
 }
 
+FitnessAppWrapper::~FitnessAppWrapper() {
+	list_diet.~ListDiet();
+	list_exercise.~ListExercise();
+}
+
+FitnessAppWrapper::FitnessAppWrapper(const FitnessAppWrapper& faw) {
+	this->user_choice = faw.getUserChoice();
+	this->list_diet = faw.list_diet;
+	this->list_exercise = faw.list_exercise;
+}
+
 void FitnessAppWrapper::runApp() {
 	int choice = 0;
 	while (choice != 9) {
@@ -280,3 +291,14 @@ ListNodeExercise* FitnessAppWrapper::getExercisePlanEdit() {
 	return pExercise;
 }
 
+string FitnessAppWrapper::getUserChoice() const {
+	return user_choice;
+}
+
+ListDiet FitnessAppWrapper::getListDiet() const {
+	return list_diet;
+}
+
+ListExercise FitnessAppWrapper::getListExercise() const {
+	return list_exercise;
+}

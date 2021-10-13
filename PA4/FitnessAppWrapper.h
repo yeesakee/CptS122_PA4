@@ -12,7 +12,9 @@
 class FitnessAppWrapper {
 public:
 	FitnessAppWrapper();
-	
+	~FitnessAppWrapper();
+	FitnessAppWrapper(const FitnessAppWrapper& faw);
+
 	// starts the main application
 	void runApp(void);
 	// Displays nine menu options for the user to choose from
@@ -65,6 +67,12 @@ public:
 	void exercisePlanChange(ListNodeExercise* plan);
 	// Return a ListNodeDiet pointer to the plan the user wants to change nullptr if not found
 	ListNodeExercise* getExercisePlanEdit();
+
+	/*****	Getter Methods	*****/
+	string getUserChoice() const;
+	ListDiet getListDiet() const;
+	ListExercise getListExercise() const;
+
 private:
 	// store the command the user entered
 	string user_choice;
