@@ -26,10 +26,10 @@ void FitnessAppWrapper::runApp() {
 
 void FitnessAppWrapper::exit() {
 	if (!list_diet.isEmpty()) {
-		storeWeeklyPlanDiet();
+		storeWeeklyPlan(list_diet.getpHead());
 	}
 	if (!list_exercise.isEmpty()) {
-		storeWeeklyPlanExercise();
+		storeWeeklyPlan(list_exercise.getpHead());
 	}
 }
 
@@ -37,33 +37,37 @@ void FitnessAppWrapper::methodChosen(int choice) {
 	diet.open("dietPlans.txt");
 	exercise.open("exercisePlans.txt");
 	if (choice == 1) {
-		loadWeeklyPlanDiet(diet, list_diet);
+		loadWeeklyPlan(diet, list_diet);
 	}
 	else if (choice == 2) {
-		loadWeeklyPlanExercise(exercise, list_exercise);
+		loadWeeklyPlan(exercise, list_exercise);
 	}
 	else if (choice == 3) {
-		storeWeeklyPlanDiet();
+		ListNodeDiet* pHead = list_diet.getpHead();
+		storeWeeklyPlan(pHead);
 	}
 	else if (choice == 4) {
-		storeWeeklyPlanExercise();
+		ListNodeExercise* pHead = list_exercise.getpHead();
+		storeWeeklyPlan(pHead);
 	}
 	else if (choice == 5) {
-		displayWeeklyPlanDiet();
+		ListNodeDiet* pHead = list_diet.getpHead();
+		displayWeeklyPlan(pHead);
 	}
 	else if (choice == 6) {
-		displayWeeklyPlanExercise();
+		ListNodeExercise* pHead = list_exercise.getpHead();
+		displayWeeklyPlan(pHead);
 	}
 	else if (choice == 7) {
 		ListNodeDiet* plan = getDietPlanEdit();
 		if (plan != nullptr) {
-			editDailyDietPlan(plan);
+			editDailyPlan(plan);
 		}
 	}
 	else if (choice == 8) {
 		ListNodeExercise* plan = getExercisePlanEdit();
 		if (plan != nullptr) {
-			editDailyExercisePlan(plan);
+			editDailyPlan(plan);
 		}
 	}
 	else if (choice == 9) {
@@ -91,97 +95,97 @@ void FitnessAppWrapper::displayMenu() {
 	cin >> user_choice;
 }
 
-void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
+void FitnessAppWrapper::loadDailyPlan(fstream& fileStream, DietPlan& plan) {
 	fileStream >> plan;
 }
 
-void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan) {
+void FitnessAppWrapper::loadWeeklyPlan(fstream& fileStream, ListDiet weeklyPlan) {
 	for (int i = 0; i < 7; i++) {
 		ListNodeDiet* lnd = new ListNodeDiet();
 		DietPlan* dp = new DietPlan();
-		loadDailyPlanDiet(fileStream, (*dp));
+		loadDailyPlan(fileStream, (*dp));
 		(*lnd).setData((*dp));
 		list_diet.insert(lnd);
 	}
 }
 
-void FitnessAppWrapper::loadDailyPlanExercise(fstream& fileStream, ExercisePlan& plan) {
+void FitnessAppWrapper::loadDailyPlan(fstream& fileStream, ExercisePlan& plan) {
 	fileStream >> plan;
 }
 
-void FitnessAppWrapper::loadWeeklyPlanExercise(fstream& fileStream, ListExercise weeklyPlan) {
+void FitnessAppWrapper::loadWeeklyPlan(fstream& fileStream, ListExercise weeklyPlan) {
 	for (int i = 0; i < 7; i++) {
 		ListNodeExercise* lne = new ListNodeExercise();
 		ExercisePlan* ep = new ExercisePlan();
-		loadDailyPlanExercise(fileStream, (*ep));
+		loadDailyPlan(fileStream, (*ep));
 		(*lne).setData((*ep));
 		list_exercise.insert(lne);
 	}
 }
 
-void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
+void FitnessAppWrapper::displayDailyPlan(ListNodeDiet* curr) {
 	DietPlan list_diet = curr->getData();
 	cout << list_diet;
 	cout << endl;
 }
 
-void FitnessAppWrapper::displayWeeklyPlanDiet() {
-	ListNodeDiet* curr = list_diet.getpHead();
+void FitnessAppWrapper::displayWeeklyPlan(ListNodeDiet* pHead) {
+	ListNodeDiet* curr = this->list_diet.getpHead();
 	for (int i = 0; i < 7; i++) {
-		displayDailyPlanDiet(curr);
+		displayDailyPlan(curr);
 		curr = curr->getNextPointer();
 	}
 }
 
-void FitnessAppWrapper::displayDailyPlanExercise(ListNodeExercise* curr) {
+void FitnessAppWrapper::displayDailyPlan(ListNodeExercise* curr) {
 	ExercisePlan ep = curr->getData();
 	cout << ep;
 	cout << endl;
 }
 
-void FitnessAppWrapper::displayWeeklyPlanExercise() {
-	ListNodeExercise* curr = list_exercise.getpHead();
+void FitnessAppWrapper::displayWeeklyPlan(ListNodeExercise* pHead) {
+	ListNodeExercise* curr = this->list_exercise.getpHead();
 	for (int i = 0; i < 7; i++) {
-		displayDailyPlanExercise(curr);
+		displayDailyPlan(curr);
 		curr = curr->getNextPointer();
 	}
 }
 
-void FitnessAppWrapper::storeDailyPlanDiet(DietPlan plan) {
+void FitnessAppWrapper::storeDailyPlan(DietPlan plan) {
 	diet << plan;
 	diet << endl;
 }
 
-void FitnessAppWrapper::storeWeeklyPlanDiet() {
-	ListNodeDiet* curr = list_diet.getpHead();
+void FitnessAppWrapper::storeWeeklyPlan(ListNodeDiet* pHead) {
+	ListNodeDiet* curr = this->list_diet.getpHead();
 	for (int i = 0; i < 7; i++) {
-		storeDailyPlanDiet(curr->getData());
+		storeDailyPlan(curr->getData());
 		curr = curr->getNextPointer();
 	}
 }
 
-void FitnessAppWrapper::storeDailyPlanExercise(ExercisePlan plan) {
+void FitnessAppWrapper::storeDailyPlan(ExercisePlan plan) {
 	exercise << plan;
 	exercise << endl;
 }
 
-void FitnessAppWrapper::storeWeeklyPlanExercise() {
-	ListNodeExercise* curr = list_exercise.getpHead();
+void FitnessAppWrapper::storeWeeklyPlan(ListNodeExercise* pHead) {
+	ListNodeExercise* curr = this->list_exercise.getpHead();
 	for (int i = 0; i < 7; i++) {
-		storeDailyPlanExercise(curr->getData());
+		storeDailyPlan(curr->getData());
 		curr = curr->getNextPointer();
 	}
 }
 
-void FitnessAppWrapper::editDailyDietPlan(ListNodeDiet* plan) {
-	dietPlanChange(plan);
+void FitnessAppWrapper::editDailyPlan(ListNodeDiet* plan) {
+	planChange(plan);
 }
 
-void FitnessAppWrapper::editDailyExercisePlan(ListNodeExercise* plan) {
-	exercisePlanChange(plan);
+void FitnessAppWrapper::editDailyPlan(ListNodeExercise* plan) {
+	planChange(plan);
 }
 
-void FitnessAppWrapper::dietPlanChange(ListNodeDiet* plan) {
+void FitnessAppWrapper::planChange(ListNodeDiet* plan) {
 	string choice = "";
 	string change = "";
 
@@ -192,7 +196,7 @@ void FitnessAppWrapper::dietPlanChange(ListNodeDiet* plan) {
 	cin >> choice;
 	cout << "Please type in the new value: ";
 	cin >> change;
-
+	cout << endl;
 	DietPlan dp = plan->getData();
 	if (stoi(choice) == 1) {
 		dp.setPlanName(change);
@@ -207,9 +211,10 @@ void FitnessAppWrapper::dietPlanChange(ListNodeDiet* plan) {
 		cout << "invalid command";
 	}
 	plan->setData(dp);
+	displayDailyPlan(plan);
 }
 
-void FitnessAppWrapper::exercisePlanChange(ListNodeExercise* plan) {
+void FitnessAppWrapper::planChange(ListNodeExercise* plan) {
 	string choice = "";
 	string change = "";
 
@@ -236,6 +241,7 @@ void FitnessAppWrapper::exercisePlanChange(ListNodeExercise* plan) {
 		cout << "invalid command";
 	}
 	plan->setData(ep);
+	displayDailyPlan(plan);
 }
 
 ListNodeDiet* FitnessAppWrapper::getDietPlanEdit() {
@@ -243,7 +249,7 @@ ListNodeDiet* FitnessAppWrapper::getDietPlanEdit() {
 	ListNodeDiet* pDiet = nullptr;
 	bool found = false;
 	bool stop = false;
-	displayWeeklyPlanDiet();
+	displayWeeklyPlan(pDiet);
 
 	while (!found && !stop) {
 		cout << "Please type in the plan name of the diet plan you want to edit: ";
@@ -268,7 +274,7 @@ ListNodeExercise* FitnessAppWrapper::getExercisePlanEdit() {
 	ListNodeExercise* pExercise = nullptr;
 	bool found = false;
 	bool stop = false;
-	displayWeeklyPlanExercise();
+	displayWeeklyPlan(pExercise);
 
 	while (!found && !stop) {
 		cout << "Please type in the plan name of the exercise plan you want to edit: ";

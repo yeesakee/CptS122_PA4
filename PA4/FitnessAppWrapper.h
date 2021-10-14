@@ -28,7 +28,7 @@ public:
 	FitnessAppWrapper(const FitnessAppWrapper& faw);
 
 	// starts the main application
-	void runApp(void);
+	void runApp();
 	// Displays nine menu options for the user to choose from
 	void displayMenu();
 	// Calls the method that the user chose
@@ -37,52 +37,55 @@ public:
 	void exit();
 
 	// Loads the daily diet plans from fileStream
-	void loadDailyPlanDiet(fstream& fileStream, DietPlan& plan);
+	void loadDailyPlan(fstream& fileStream, DietPlan& plan);
 	// Loads the weekly diet plan given 
-	void loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan);
+	void loadWeeklyPlan(fstream& fileStream, ListDiet weeklyPlan);
 	// Loads the daily diet plans from fileStream
-	void loadDailyPlanExercise(fstream& fileStream, ExercisePlan& plan);
+	void loadDailyPlan(fstream& fileStream, ExercisePlan& plan);
 	// Loads the weekly diet plan given 
-	void loadWeeklyPlanExercise(fstream& fileStream, ListExercise weeklyPlan);
+	void loadWeeklyPlan(fstream& fileStream, ListExercise weeklyPlan);
 
 	// Loads the daily diet plan from input_diet
-	void displayDailyPlanDiet(ListNodeDiet* curr);
+	void displayDailyPlan(ListNodeDiet* curr);
 	// Loads the weekly diet plan
-	void displayWeeklyPlanDiet();
+	void displayWeeklyPlan(ListNodeDiet* pHead);
 	// Loads the daily exercise plan from input_diet
-	void displayDailyPlanExercise(ListNodeExercise* curr);
+	void displayDailyPlan(ListNodeExercise* curr);
 	// Loads the weekly exercise plan
-	void displayWeeklyPlanExercise();
+	void displayWeeklyPlan(ListNodeExercise* pHead);
 
 	// Store the daily diet plan to output_diet
-	void storeDailyPlanDiet(DietPlan plan);
+	void storeDailyPlan(DietPlan plan);
 	// Store the weekly diet plan
-	void storeWeeklyPlanDiet();
+	void storeWeeklyPlan(ListNodeDiet* pHead);
 	// Store the daily exercise plan to output_diet
-	void storeDailyPlanExercise(ExercisePlan plan);
+	void storeDailyPlan(ExercisePlan plan);
 	// Store the weekly exercise plan
-	void storeWeeklyPlanExercise();
+	void storeWeeklyPlan(ListNodeExercise* pHead);
 
 	// Edit the daily diet plan given
-	void editDailyDietPlan(ListNodeDiet* plan);
+	void editDailyPlan(ListNodeDiet* plan);
 	// Edit the daily exercise plan given
-	void editDailyExercisePlan(ListNodeExercise* plan);
+	void editDailyPlan(ListNodeExercise* plan);
 
 	/*****	Helper Methods	*****/
 	// Prompt the user for what they want to change from DietPlan
 	// Update value to new value
-	void dietPlanChange(ListNodeDiet* plan);
+	void planChange(ListNodeDiet* plan);
 	// Return a ListNodeDiet pointer to the plan the user wants to change nullptr if not found
 	ListNodeDiet* getDietPlanEdit();
 	// Prompt the user for what they want to change from ExercisePlan
 	// Update value to new value
-	void exercisePlanChange(ListNodeExercise* plan);
+	void planChange(ListNodeExercise* plan);
 	// Return a ListNodeDiet pointer to the plan the user wants to change nullptr if not found
 	ListNodeExercise* getExercisePlanEdit();
 
 	/*****	Getter Methods	*****/
+	// return string of user_choice
 	string getUserChoice() const;
+	// return ListDiet of list_diet
 	ListDiet getListDiet() const;
+	// return ListExercist list_exercise
 	ListExercise getListExercise() const;
 
 private:
