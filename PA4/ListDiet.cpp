@@ -6,18 +6,26 @@ ListDiet::ListDiet() {
 }
 
 ListDiet::~ListDiet() {
+	ListNodeDiet* prev = pHead;
 	while (!isEmpty()) {
-		ListNodeDiet* temp = pHead;
-		pHead = pHead->getNextPointer();
-		delete(temp);
+		ListNodeDiet* curr = pHead->getNextPointer();
+		pHead = curr;
+		delete(prev);
+		prev = curr;
 	}
+	pTail = nullptr;
 }
 
-ListNodeDiet* ListDiet::getpHead() {
+ListDiet::ListDiet(const ListDiet& list_diet) {
+	this->pHead = list_diet.getpHead();
+	this->pTail = list_diet.getpTail();
+}
+
+ListNodeDiet* ListDiet::getpHead() const{
 	return pHead;
 }
 
-ListNodeDiet* ListDiet::getpTail() {
+ListNodeDiet* ListDiet::getpTail() const{
 	return pTail;
 }
 

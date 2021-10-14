@@ -1,3 +1,10 @@
+/*
+Yeesa Kee
+CPTS 122
+Lab 4
+Represents a weekly diet and exercise plan.
+Includes functions that allow the user to load, display, store, and edit diet and exercise plans
+*/
 #ifndef FITNESSAPPWRAPPER_H
 #define FITNESSAPPWRAPPER_H
 
@@ -9,10 +16,15 @@
 #include "ListDiet.h"
 #include "ListExercise.h"
 
+// FitnessAppWrapper class that stores data regarding weekly diet and exercise plans
+// contains methods that allow the user to load, display, store, and edit the plans
 class FitnessAppWrapper {
 public:
+	// FitnessAppWrapper constructor
 	FitnessAppWrapper();
+	// FitnessAppWrapper deconstructor
 	~FitnessAppWrapper();
+	// FitnessAppWrapper copy constructor
 	FitnessAppWrapper(const FitnessAppWrapper& faw);
 
 	// starts the main application

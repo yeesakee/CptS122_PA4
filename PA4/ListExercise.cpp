@@ -6,18 +6,27 @@ ListExercise::ListExercise() {
 }
 
 ListExercise::~ListExercise() {
+	ListNodeExercise* prev = pHead;
 	while (!isEmpty()) {
-		ListNodeExercise* temp = pHead;
-		pHead = pHead->getNextPointer();
-		delete(temp);
+		ListNodeExercise* curr = pHead->getNextPointer();
+		pHead = curr;
+		delete(prev);
+		prev = curr;
 	}
+	pTail = nullptr;
 }
 
-ListNodeExercise* ListExercise::getpHead() {
+ListExercise::ListExercise(const ListExercise& list_exercise)
+{
+	this->pHead = list_exercise.getpHead();
+	this->pTail = list_exercise.getpTail();
+}
+
+ListNodeExercise* ListExercise::getpHead() const {
 	return pHead;
 }
 
-ListNodeExercise* ListExercise::getpTail() {
+ListNodeExercise* ListExercise::getpTail() const {
 	return pTail;
 }
 

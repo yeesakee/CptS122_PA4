@@ -34,6 +34,8 @@ void FitnessAppWrapper::exit() {
 }
 
 void FitnessAppWrapper::methodChosen(int choice) {
+	diet.open("dietPlans.txt");
+	exercise.open("exercisePlans.txt");
 	if (choice == 1) {
 		loadWeeklyPlanDiet(diet, list_diet);
 	}
@@ -70,9 +72,12 @@ void FitnessAppWrapper::methodChosen(int choice) {
 	else {
 		cout << "invalid command" << endl;
 	}
+	diet.close();
+	exercise.close();
 }
 
 void FitnessAppWrapper::displayMenu() {
+	cout << endl;
 	cout << "1. Load weekly diet plan from file" << endl;
 	cout << "2. Load weekly exercise plan from file" << endl;
 	cout << "3. Store weekly diet plan to file" << endl;
@@ -84,7 +89,6 @@ void FitnessAppWrapper::displayMenu() {
 	cout << "9. Exit." << endl;
 	cout << "Please choose from the following nine options (enter number): ";
 	cin >> user_choice;
-	cout << endl;
 }
 
 void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
@@ -92,7 +96,6 @@ void FitnessAppWrapper::loadDailyPlanDiet(fstream& fileStream, DietPlan& plan) {
 }
 
 void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyPlan) {
-	fileStream.open("dietPlans.txt");
 	for (int i = 0; i < 7; i++) {
 		ListNodeDiet* lnd = new ListNodeDiet();
 		DietPlan* dp = new DietPlan();
@@ -100,7 +103,6 @@ void FitnessAppWrapper::loadWeeklyPlanDiet(fstream& fileStream, ListDiet weeklyP
 		(*lnd).setData((*dp));
 		list_diet.insert(lnd);
 	}
-	fileStream.close();
 }
 
 void FitnessAppWrapper::loadDailyPlanExercise(fstream& fileStream, ExercisePlan& plan) {
@@ -108,7 +110,6 @@ void FitnessAppWrapper::loadDailyPlanExercise(fstream& fileStream, ExercisePlan&
 }
 
 void FitnessAppWrapper::loadWeeklyPlanExercise(fstream& fileStream, ListExercise weeklyPlan) {
-	fileStream.open("exercisePlans.txt");
 	for (int i = 0; i < 7; i++) {
 		ListNodeExercise* lne = new ListNodeExercise();
 		ExercisePlan* ep = new ExercisePlan();
@@ -116,7 +117,6 @@ void FitnessAppWrapper::loadWeeklyPlanExercise(fstream& fileStream, ListExercise
 		(*lne).setData((*ep));
 		list_exercise.insert(lne);
 	}
-	fileStream.close();
 }
 
 void FitnessAppWrapper::displayDailyPlanDiet(ListNodeDiet* curr) {
@@ -154,12 +154,10 @@ void FitnessAppWrapper::storeDailyPlanDiet(DietPlan plan) {
 
 void FitnessAppWrapper::storeWeeklyPlanDiet() {
 	ListNodeDiet* curr = list_diet.getpHead();
-	diet.open("dietPlans.txt");
 	for (int i = 0; i < 7; i++) {
 		storeDailyPlanDiet(curr->getData());
 		curr = curr->getNextPointer();
 	}
-	diet.close();
 }
 
 void FitnessAppWrapper::storeDailyPlanExercise(ExercisePlan plan) {
@@ -169,12 +167,10 @@ void FitnessAppWrapper::storeDailyPlanExercise(ExercisePlan plan) {
 
 void FitnessAppWrapper::storeWeeklyPlanExercise() {
 	ListNodeExercise* curr = list_exercise.getpHead();
-	exercise.open("exercisePlans.txt");
 	for (int i = 0; i < 7; i++) {
 		storeDailyPlanExercise(curr->getData());
 		curr = curr->getNextPointer();
 	}
-	exercise.close();
 }
 
 void FitnessAppWrapper::editDailyDietPlan(ListNodeDiet* plan) {
@@ -224,6 +220,7 @@ void FitnessAppWrapper::exercisePlanChange(ListNodeExercise* plan) {
 	cin >> choice;
 	cout << "Please type in the new value: ";
 	cin >> change;
+	cout << endl;
 
 	ExercisePlan ep = plan->getData();
 	if (stoi(choice) == 1) {
@@ -251,13 +248,13 @@ ListNodeDiet* FitnessAppWrapper::getDietPlanEdit() {
 	while (!found && !stop) {
 		cout << "Please type in the plan name of the diet plan you want to edit: ";
 		cin >> plan_name;
+		if (plan_name.compare("exit") == 0) {
+			stop = true;
+			break;
+		}
 		pDiet = list_diet.searchDietPlan(plan_name);
 		if (pDiet == nullptr) {
-			cout << "Diet plan not found, try again or enter exit: ";
-			cin >> plan_name;
-			if (plan_name.compare("exit") == 0) {
-				stop = true;
-			}
+			cout << "Diet plan not found, try again or enter exit" << endl;
 		}
 		else {
 			found = true;
@@ -276,13 +273,13 @@ ListNodeExercise* FitnessAppWrapper::getExercisePlanEdit() {
 	while (!found && !stop) {
 		cout << "Please type in the plan name of the exercise plan you want to edit: ";
 		cin >> plan_name;
+		if (plan_name.compare("exit") == 0) {
+			stop = true;
+			break;
+		}
 		pExercise = list_exercise.searchExercisePlan(plan_name);
 		if (pExercise == nullptr) {
-			cout << "Exercise plan not found, try again or enter exit: ";
-			cin >> plan_name;
-			if (plan_name.compare("exit") == 0) {
-				stop = true;
-			}
+			cout << "Exercise plan not found, try again or enter exit" <<endl;
 		}
 		else {
 			found = true;

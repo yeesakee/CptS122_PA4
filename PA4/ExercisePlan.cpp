@@ -10,9 +10,9 @@ ExercisePlan::~ExercisePlan() {
 }
 
 ExercisePlan::ExercisePlan(const ExercisePlan& dp) {
-	goal_steps = dp.goal_steps;
-	plan_name = dp.plan_name;
-	date = dp.date;
+	goal_steps = dp.getGoalSteps();
+	plan_name = dp.getPlanName();
+	date = dp.getDate();
 }
 
 void ExercisePlan::editGoal(int steps) {
@@ -26,15 +26,15 @@ void ExercisePlan::setDate(string date) {
 	this->date = date;
 }
 
-int ExercisePlan::getGoalSteps() {
+int ExercisePlan::getGoalSteps() const{
 	return goal_steps;
 }
 
-string ExercisePlan::getPlanName() {
+string ExercisePlan::getPlanName() const {
 	return plan_name;
 }
 
-string ExercisePlan::getDate() {
+string ExercisePlan::getDate() const {
 	return date;
 }
 

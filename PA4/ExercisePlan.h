@@ -1,3 +1,9 @@
+/*
+Yeesa Kee
+CPTS 122
+Lab 4
+Represents a daily exercise plan. Including the goal steps, plan name, and date of the plan.
+*/
 #ifndef EXERCISEPLAN_H
 #define EXERCISEPLAN_H
 
@@ -8,19 +14,30 @@
 using std::string;
 using namespace std;
 
+// ExercisePlan class, represents and stores one daily exercise plan
 class ExercisePlan {
 public:
+
+	// ExercisePlan constructor
 	ExercisePlan();
+	// ExercisePlan deconstructor
 	~ExercisePlan();
+	// ExercisePlan copy constructor
 	ExercisePlan(const ExercisePlan& dp);
 
-	void editGoal(int calores);
+	// edit the goal_steps with the given steps
+	void editGoal(int steps);
+	// set the plan_name to the given name
 	void setPlanName(string name);
+	// set the date to the given date
 	void setDate(string date);
 
-	int getGoalSteps();
-	string getPlanName();
-	string getDate();
+	// return the goal_steps
+	int getGoalSteps() const;
+	// return the plan_name
+	string getPlanName() const;
+	// return the date
+	string getDate() const;
 
 private:
 	int goal_steps;
